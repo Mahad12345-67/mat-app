@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchForm from './SearchForm';
-import RecipeCard from './RecipeCard';
+import RecipeList from './RecipeList';
 import RecipeDetails from './RecipeDetails';
 
 function App() {
@@ -38,32 +38,22 @@ function App() {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Mahad's Foodmenu</h1>
-      <blockquote>Real food doesn't have ingredients, real food is ingredients.
-          <cite> - Mahad Farah</cite>
+      <blockquote>
+        Real food doesn't have ingredients, real food is ingredients.
+        <cite> - Mahad Farah</cite>
       </blockquote>
-      {!selectedRecipe && (
-        <SearchForm 
-          query={query} 
-          onChange={handleChange} 
-          onSubmit={handleSubmit}
-        />
-      )}
-      <div className="row">
-        {recipes &&
-          recipes.map(recipe => (
-            <RecipeCard 
-              key={recipe.idMeal} 
-              recipe={recipe} 
-              onSelectRecipe={handleSelectRecipe}
-              selectedRecipe={selectedRecipe}
-            />
-          ))}
-      </div>
+      <SearchForm
+        query={query}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+      <RecipeList
+        recipes={recipes}
+        onSelectRecipe={handleSelectRecipe}
+        selectedRecipe={selectedRecipe}
+      />
       {selectedRecipe && (
-        <RecipeDetails 
-          recipe={selectedRecipe} 
-          onGoBack={handleGoBack}
-        />
+        <RecipeDetails recipe={selectedRecipe} onGoBack={handleGoBack} />
       )}
     </div>
   );
